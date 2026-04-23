@@ -1,0 +1,3038 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnMax — Complete Programme Structure</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                margin: 0 !important;
+            }
+
+            @page {
+                margin: 0;
+                size: A4;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --navy: #050A14;
+            --navy2: #0A1020;
+            --navy3: #0E1628;
+            --gold: #C9A84C;
+            --gold2: #E8C97A;
+            --goldf: rgba(201, 168, 76, 0.1);
+            --cream: #F2EDE3;
+            --white: #FFFFFF;
+            --muted: rgba(242, 237, 227, 0.52);
+            --dim: rgba(242, 237, 227, 0.22);
+            --line: rgba(201, 168, 76, 0.16);
+            --line2: rgba(242, 237, 227, 0.07);
+            --green: rgba(32, 210, 140, 0.85);
+            --greenf: rgba(32, 210, 140, 0.1);
+            --blue: #4896ff;
+            --bluef: rgba(72, 150, 255, 0.1);
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--navy);
+            color: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .no-print.dl-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            background: var(--gold);
+            color: var(--navy);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 13px 28px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 24px rgba(201, 168, 76, 0.35);
+            transition: all .2s;
+        }
+
+        .dl-btn:hover {
+            background: var(--gold2);
+            transform: translateY(-2px);
+        }
+
+        /* background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(242, 237, 227, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(242, 237, 227, 0.035) 1px, transparent 1px);
+            background-size: 44px 44px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 40px 100px;
+        }
+
+        /* ── UTILITIES ── */
+        .gold {
+            color: var(--gold);
+        }
+
+        .white {
+            color: var(--white);
+        }
+
+        .label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .label::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: 60px 0;
+        }
+
+        .section-gap {
+            height: 80px;
+        }
+
+        /* ── HEADER ── */
+        .hdr {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 36px 0 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .hdr-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .hdr-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hdr-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .hdr-brand {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 5px;
+            color: var(--gold);
+        }
+
+        .hdr-sub {
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .hdr-right {
+            text-align: right;
+        }
+
+        .hdr-badge {
+            display: inline-block;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid var(--line);
+            padding: 5px 14px;
+            margin-bottom: 8px;
+        }
+
+        .hdr-info {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        /* ── TICKER ── */
+        .ticker {
+            overflow: hidden;
+            background: var(--goldf);
+            border-bottom: 1px solid var(--line);
+            padding: 9px 0;
+        }
+
+        .ticker-inner {
+            display: flex;
+            gap: 44px;
+            animation: tick 30s linear infinite;
+            width: max-content;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .ticker-item::after {
+            content: '◆';
+            font-size: 5px;
+            opacity: .35;
+        }
+
+        @keyframes tick {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ── HERO ── */
+        .hero {
+            padding: 68px 0 52px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .hero-eyebrow {
+            margin-bottom: 20px;
+        }
+
+        .hero-h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(60px, 10vw, 100px);
+            line-height: .9;
+            letter-spacing: 3px;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .hero-h1 .g {
+            color: var(--gold);
+        }
+
+        .hero-h1 .s {
+            -webkit-text-stroke: 1.5px rgba(242, 237, 227, .4);
+            color: transparent;
+        }
+
+        .hero-row {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 48px;
+            align-items: end;
+            margin-top: 32px;
+        }
+
+        .hero-quote {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-size: 19px;
+            color: var(--cream);
+            line-height: 1.6;
+            border-left: 2px solid var(--gold);
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .hero-body {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--line);
+            margin-top: 48px;
+        }
+
+        .hs {
+            padding: 24px 0;
+            border-right: 1px solid var(--line);
+        }
+
+        .hs:last-child {
+            border-right: none;
+        }
+
+        .hs-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 44px;
+            color: var(--gold);
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+
+        .hs-label {
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* ── ECOSYSTEM OVERVIEW ── */
+        .ecosystem {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2px;
+            margin-top: 4px;
+        }
+
+        .eco-card {
+            padding: 36px 28px;
+            border: 1px solid var(--line);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .eco-card.l1 {
+            background: var(--navy2);
+            border-left: 3px solid var(--gold);
+        }
+
+        .eco-card.l2 {
+            background: var(--navy2);
+            border-left: 3px solid var(--green);
+        }
+
+        .eco-card.l3 {
+            background: var(--navy2);
+            border-left: 3px solid var(--blue);
+        }
+
+        .eco-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 80px;
+            color: rgba(201, 168, 76, .05);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .eco-card.l2 .eco-num {
+            color: rgba(32, 210, 140, .05);
+        }
+
+        .eco-card.l3 .eco-num {
+            color: rgba(72, 150, 255, .05);
+        }
+
+        .eco-badge {
+            display: inline-block;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            margin-bottom: 12px;
+        }
+
+        .eco-card.l1 .eco-badge {
+            color: var(--gold);
+            border: 1px solid rgba(201, 168, 76, .3);
+        }
+
+        .eco-card.l2 .eco-badge {
+            color: var(--green);
+            border: 1px solid rgba(32, 210, 140, .3);
+        }
+
+        .eco-card.l3 .eco-badge {
+            color: var(--blue);
+            border: 1px solid rgba(72, 150, 255, .3);
+        }
+
+        .eco-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .eco-sub {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .eco-items {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .eco-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            font-size: 11px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+
+        .eco-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .l1 .eco-dot {
+            background: var(--gold);
+        }
+
+        .l2 .eco-dot {
+            background: var(--green);
+        }
+
+        .l3 .eco-dot {
+            background: var(--blue);
+        }
+
+        /* connector arrow */
+        .eco-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--gold);
+            padding: 0 8px;
+            background: var(--navy2);
+        }
+
+        /* ── FLOW ARROW ── */
+        .flow-connector {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 2px 0;
+        }
+
+        .fc-box {
+            flex: 1;
+            background: var(--goldf);
+            border: 1px solid var(--line);
+            padding: 12px 20px;
+            text-align: center;
+        }
+
+        .fc-text {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .fc-arr {
+            color: var(--gold);
+            font-size: 18px;
+            padding: 0 6px;
+            background: var(--navy2);
+        }
+
+        /* ── SECTION TITLES ── */
+        .sec-title-wrap {
+            padding: 48px 0 36px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 0;
+        }
+
+        .sec-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 120px;
+            color: rgba(201, 168, 76, .06);
+            line-height: 1;
+            margin-bottom: -20px;
+        }
+
+        .sec-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(44px, 7vw, 72px);
+            letter-spacing: 2px;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .sec-title .g {
+            color: var(--gold);
+        }
+
+        .sec-desc {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 720px;
+            margin-top: 16px;
+        }
+
+        /* ── SESSION FORMAT ── */
+        .session-format {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2px;
+            margin: 32px 0;
+        }
+
+        .sf {
+            padding: 24px;
+            background: var(--navy2);
+            border: 1px solid var(--line);
+            text-align: center;
+        }
+
+        .sf-time {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .sf-name {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .sf-desc {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ── WEEK HEADER ── */
+        .week-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 28px 0 20px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 2px;
+        }
+
+        .wh-left {}
+
+        .wh-week {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 52px;
+            color: rgba(201, 168, 76, .18);
+            line-height: 1;
+            letter-spacing: 2px;
+        }
+
+        .wh-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            color: var(--white);
+            letter-spacing: 1px;
+            margin-top: -8px;
+        }
+
+        .wh-days {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .wh-right {
+            text-align: right;
+        }
+
+        .wh-outcome {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .wh-outcome strong {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        /* ── DAY CARDS ── */
+        .days-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 2px;
+        }
+
+        .day-card {
+            background: var(--navy2);
+            border: 1px solid var(--line);
+            padding: 24px 24px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .day-card.milestone {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, rgba(201, 168, 76, .08) 0%, var(--navy2) 100%);
+        }
+
+        .dc-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .dc-day {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 40px;
+            color: rgba(201, 168, 76, .2);
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+
+        .day-card.milestone .dc-day {
+            color: rgba(201, 168, 76, .5);
+        }
+
+        .dc-badge {
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border: 1px solid var(--line);
+            color: var(--muted);
+        }
+
+        .day-card.milestone .dc-badge {
+            color: var(--gold);
+            border-color: rgba(201, 168, 76, .4);
+        }
+
+        .dc-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--white);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .dc-teach {
+            margin-bottom: 8px;
+        }
+
+        .dc-label {
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .dc-body {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .dc-build {
+            margin-bottom: 8px;
+        }
+
+        .dc-outcome {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--line2);
+        }
+
+        .dc-outcome-icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .dc-outcome-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .dc-outcome-text {
+            font-size: 10px;
+            color: var(--gold);
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        /* ── MILESTONE CARD FULL WIDTH ── */
+        .milestone-full {
+            background: var(--gold);
+            padding: 36px 40px;
+            margin-bottom: 2px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .mf-left {}
+
+        .mf-label {
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--navy);
+            opacity: .6;
+            margin-bottom: 8px;
+        }
+
+        .mf-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: var(--navy);
+            line-height: 1;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .mf-body {
+            font-size: 12px;
+            color: var(--navy);
+            opacity: .7;
+            line-height: 1.7;
+            max-width: 520px;
+        }
+
+        .mf-right {
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .mf-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 72px;
+            color: var(--navy);
+            line-height: 1;
+            letter-spacing: 2px;
+        }
+
+        .mf-sub {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--navy);
+            opacity: .55;
+            margin-top: 4px;
+        }
+
+        /* ── OUTCOMES ROW ── */
+        .outcomes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-top: 4px;
+        }
+
+        .oc {
+            padding: 28px 20px;
+            background: var(--navy2);
+            border: 1px solid var(--line);
+            text-align: center;
+        }
+
+        .oc-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 12px;
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .oc-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .oc-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 17px;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .oc-body {
+            font-size: 10px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ── ADVANCED CURRICULUM ── */
+        .adv-intro {
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(32, 210, 140, .06) 0%, var(--navy2) 100%);
+            border: 1px solid rgba(32, 210, 140, .2);
+            margin-bottom: 4px;
+        }
+
+        .adv-intro-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: var(--white);
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .adv-intro-body {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        .adv-modules {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 4px;
+        }
+
+        .am {
+            padding: 32px;
+            background: var(--navy2);
+            border: 1px solid var(--line);
+            border-top: 2px solid var(--green);
+        }
+
+        .am-month {
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 10px;
+        }
+
+        .am-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            color: var(--white);
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .am-body {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.75;
+            margin-bottom: 16px;
+        }
+
+        .am-sessions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .am-session {
+            padding: 10px 14px;
+            background: var(--navy3);
+            border-left: 2px solid rgba(32, 210, 140, .3);
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .am-session strong {
+            color: var(--cream);
+            font-weight: 500;
+        }
+
+        /* selection criteria */
+        .selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 4px;
+        }
+
+        .sel-card {
+            padding: 28px;
+            background: var(--navy2);
+            border: 1px solid var(--line);
+        }
+
+        .sel-title {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .sel-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sel-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .sel-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        /* ── INTER SCHOOL COMPETITION ── */
+        .comp-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+            gap: 0;
+            align-items: center;
+            margin-bottom: 4px;
+            background: var(--navy2);
+            border: 1px solid var(--line);
+            padding: 32px 24px;
+        }
+
+        .cf-node {
+            text-align: center;
+            padding: 16px;
+        }
+
+        .cf-n-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .cf-n-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .cf-n-body {
+            font-size: 10px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .cf-arrow {
+            color: var(--gold);
+            font-size: 16px;
+            opacity: .6;
+            padding: 0 4px;
+        }
+
+        .comp-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 4px;
+        }
+
+        .cd {
+            padding: 28px;
+            background: var(--navy2);
+            border: 1px solid var(--line);
+        }
+
+        .cd-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 12px;
+        }
+
+        .cd-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .cd-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cd-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .cd-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--blue);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        /* ── INVESTOR PITCH ── */
+        .investor-intro {
+            background: linear-gradient(135deg, rgba(72, 150, 255, .07) 0%, var(--navy2) 100%);
+            border: 1px solid rgba(72, 150, 255, .25);
+            padding: 40px;
+            margin-bottom: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .investor-intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--blue), transparent);
+        }
+
+        .ii-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 9px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--blue);
+            background: var(--bluef);
+            padding: 6px 14px;
+            margin-bottom: 20px;
+        }
+
+        .ii-badge::before {
+            content: '★';
+        }
+
+        .ii-headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(36px, 6vw, 60px);
+            line-height: .95;
+            letter-spacing: 2px;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .ii-headline .g {
+            color: var(--gold);
+        }
+
+        .ii-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .ii-body {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.85;
+        }
+
+        .ii-body strong {
+            color: var(--cream);
+            font-weight: 500;
+        }
+
+        .ii-event {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ii-ev-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 12px;
+            background: var(--navy3);
+            border-left: 2px solid rgba(72, 150, 255, .3);
+        }
+
+        .ii-ev-icon {
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(72, 150, 255, .3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .ii-ev-icon svg {
+            width: 12px;
+            height: 12px;
+            stroke: var(--blue);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .ii-ev-text {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .ii-ev-text strong {
+            color: var(--cream);
+            font-weight: 500;
+        }
+
+        /* prizes */
+        .prizes {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 4px;
+        }
+
+        .prize {
+            padding: 32px 24px;
+            text-align: center;
+            background: var(--navy2);
+            border: 1px solid var(--line);
+        }
+
+        .prize.first {
+            background: linear-gradient(135deg, rgba(201, 168, 76, .1) 0%, var(--navy2) 100%);
+            border-color: var(--gold);
+        }
+
+        .prize-rank {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 52px;
+            color: var(--gold);
+            line-height: 1;
+            opacity: .3;
+            margin-bottom: 4px;
+        }
+
+        .prize.first .prize-rank {
+            opacity: 1;
+        }
+
+        .prize-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .prize-amount {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .prize-body {
+            font-size: 10px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        /* ── STUDENT LEARNING OUTCOMES ── */
+        .outcomes-full {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 4px;
+        }
+
+        .slo {
+            padding: 28px;
+            background: var(--navy2);
+            border: 1px solid var(--line);
+        }
+
+        .slo-level {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .slo-l1 {
+            color: var(--gold);
+        }
+
+        .slo-l2 {
+            color: var(--green);
+        }
+
+        .slo-l3 {
+            color: var(--blue);
+        }
+
+        .slo-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--white);
+            margin-bottom: 14px;
+        }
+
+        .slo-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .slo-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .slo-check {
+            font-size: 11px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .slo-l1-check {
+            color: var(--gold);
+        }
+
+        .slo-l2-check {
+            color: var(--green);
+        }
+
+        .slo-l3-check {
+            color: var(--blue);
+        }
+
+        /* ── SCHOOL BENEFITS ── */
+        .school-bens {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 4px;
+        }
+
+        .sb {
+            padding: 32px;
+            background: var(--navy2);
+            border: 1px solid var(--line);
+        }
+
+        .sb-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .sb-body {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        /* ── CLOSING ── */
+        .closing {
+            text-align: center;
+            padding: 80px 40px;
+            border-top: 1px solid var(--line);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cl-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            pointer-events: none;
+        }
+
+        .cl-h {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(44px, 8vw, 80px);
+            line-height: 1;
+            letter-spacing: 3px;
+            color: var(--white);
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .cl-h .g {
+            color: var(--gold);
+        }
+
+        .cl-body {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-size: 18px;
+            color: var(--muted);
+            max-width: 540px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .cl-contact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            position: relative;
+        }
+
+        .cl-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 2px;
+            color: var(--gold);
+        }
+
+        .cl-detail {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .cl-sep {
+            width: 1px;
+            height: 32px;
+            background: var(--line);
+        }
+
+        /* footer */
+        .ftr {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .ftr-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 4px;
+            color: var(--gold);
+        }
+
+        .ftr-right {
+            text-align: right;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        @media(max-width:680px) {
+            .page {
+                padding: 0 20px 60px;
+            }
+
+            .hero-row,
+            .ecosystem,
+            .outcomes,
+            .outcomes-full,
+            .selection,
+            .comp-detail,
+            .prizes,
+            .school-bens,
+            .adv-modules,
+            .ii-cols,
+            .days-grid,
+            .session-format {
+                grid-template-columns: 1fr;
+            }
+
+            .comp-flow {
+                grid-template-columns: 1fr;
+                padding: 24px;
+            }
+
+            .cf-arrow {
+                transform: rotate(90deg);
+                margin: 6px auto;
+            }
+
+            .milestone-full {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="no-print dl-btn" onclick="window.print()">↓ Save as PDF</button>
+
+    <div class="page">
+
+        <!-- HEADER -->
+        <div class="hdr">
+            <div class="hdr-left">
+                <div class="hdr-icon">
+                    <svg viewBox="0 0 24 24">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="hdr-brand">LearnMax</div>
+                    <div class="hdr-sub">Complete Programme Architecture · 2026</div>
+                </div>
+            </div>
+            <div class="hdr-right">
+                <div class="hdr-badge">Confidential · School Partner Document</div>
+                <div class="hdr-info">Tanish Arora · Founder<br>+91 81462 81299 · learnmaxskills@gmail.com</div>
+            </div>
+        </div>
+
+        <!-- TICKER -->
+        <div class="ticker">
+            <div class="ticker-inner">
+                <span class="ticker-item">Build With AI</span><span class="ticker-item">30 Days</span><span
+                    class="ticker-item">Advanced Founder Track</span><span class="ticker-item">Inter-School
+                    Competition</span><span class="ticker-item">Angel Investor Pitch</span><span
+                    class="ticker-item">Real Funding</span><span class="ticker-item">Zero Coding</span><span
+                    class="ticker-item">Live Products</span><span class="ticker-item">Student Entrepreneurs</span><span
+                    class="ticker-item">Grade 6–12</span>
+                <span class="ticker-item">Build With AI</span><span class="ticker-item">30 Days</span><span
+                    class="ticker-item">Advanced Founder Track</span><span class="ticker-item">Inter-School
+                    Competition</span><span class="ticker-item">Angel Investor Pitch</span><span
+                    class="ticker-item">Real Funding</span><span class="ticker-item">Zero Coding</span><span
+                    class="ticker-item">Live Products</span><span class="ticker-item">Student Entrepreneurs</span><span
+                    class="ticker-item">Grade 6–12</span>
+            </div>
+        </div>
+
+        <!-- HERO -->
+        <div class="hero">
+            <div class="label" style="margin-bottom:20px;">For Manav Rachna International School · Ludhiana</div>
+            <div class="hero-h1">
+                BUILD WITH AI<br>
+                <span class="g">LAUNCH YOUR</span><br>
+                <span class="s">STARTUP</span>
+            </div>
+            <div class="hero-row">
+                <div>
+                    <div class="hero-quote">"Not a course. Not a workshop. A complete entrepreneur-building ecosystem —
+                        from first idea to funded startup."</div>
+                </div>
+                <div>
+                    <div class="hero-body">LearnMax is a three-level programme that transforms students from AI users
+                        into AI entrepreneurs. Each level unlocks the next. Each milestone is earned, not given. By the
+                        end — the best students are pitching real startups to real investors for real funding.</div>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="hs">
+                    <div class="hs-num">30</div>
+                    <div class="hs-label">Days · Level 1</div>
+                </div>
+                <div class="hs">
+                    <div class="hs-num">90</div>
+                    <div class="hs-label">Days · Advanced</div>
+                </div>
+                <div class="hs">
+                    <div class="hs-num">1</div>
+                    <div class="hs-label">Grand Competition</div>
+                </div>
+                <div class="hs">
+                    <div class="hs-num">∞</div>
+                    <div class="hs-label">Student Potential</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-gap"></div>
+
+        <!-- ECOSYSTEM OVERVIEW -->
+        <div class="label" style="margin-bottom:24px;">The Complete Ecosystem</div>
+        <div class="ecosystem">
+            <div class="eco-card l1">
+                <div class="eco-num">01</div>
+                <div class="eco-badge">Foundation · Everyone</div>
+                <div class="eco-title">Build With AI</div>
+                <div class="eco-sub">30 days. Every student. Live product on the internet. Zero coding required.</div>
+                <div class="eco-items">
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>30 live evening sessions — 8–9 PM only
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Real website, app, or e-commerce store
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Professional AI marketing video
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Automated business system
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Public Demo Day — parents invited
+                    </div>
+                </div>
+            </div>
+
+            <div class="eco-card l2">
+                <div class="eco-num">02</div>
+                <div class="eco-badge">Advanced · Selected</div>
+                <div class="eco-title">Founder Track</div>
+                <div class="eco-sub">90 days. Top builders only. Scale the startup. Generate first revenue. Get
+                    pitch-ready.</div>
+                <div class="eco-items">
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Selected after Demo Day performance
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Scale to 100 real users
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Generate first revenue
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Build investor-ready pitch deck
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Qualify for LaunchPad
+                    </div>
+                </div>
+            </div>
+
+            <div class="eco-card l3">
+                <div class="eco-num">03</div>
+                <div class="eco-badge">Elite · The Best</div>
+                <div class="eco-title">LaunchPad</div>
+                <div class="eco-sub">Inter-school competition. Real investors. Real funding. Real startup world entry.
+                </div>
+                <div class="eco-items">
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Inter-school competition event
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Live pitch to angel investors
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Top 3 receive actual funding
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Mentorship from industry leaders
+                    </div>
+                    <div class="eco-item">
+                        <div class="eco-dot"></div>Media coverage and recognition
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLOW -->
+        <div class="flow-connector" style="margin-top:2px;">
+            <div class="fc-box">
+                <div class="fc-text">Complete 30 Days</div>
+            </div>
+            <div class="fc-arr">→</div>
+            <div class="fc-box">
+                <div class="fc-text">Excel at Demo Day</div>
+            </div>
+            <div class="fc-arr">→</div>
+            <div class="fc-box">
+                <div class="fc-text">Selected for Founder Track</div>
+            </div>
+            <div class="fc-arr">→</div>
+            <div class="fc-box">
+                <div class="fc-text">Scale & Generate Revenue</div>
+            </div>
+            <div class="fc-arr">→</div>
+            <div class="fc-box">
+                <div class="fc-text">Qualify for LaunchPad</div>
+            </div>
+            <div class="fc-arr">→</div>
+            <div class="fc-box">
+                <div class="fc-text">Pitch Investors · Get Funded</div>
+            </div>
+        </div>
+
+        <!-- ════════════ LEVEL 1 ════════════ -->
+        <div class="page-break"></div>
+        <div class="sec-title-wrap">
+            <div class="sec-number">01</div>
+            <div class="sec-title">BUILD WITH AI<br><span class="g">30-DAY PROGRAMME</span></div>
+            <div class="sec-desc">The foundational masterpiece. Every enrolled student goes through all 30 days. No
+                prior experience. No coding. No technical background needed. By Day 30 they have built something real
+                that exists on the internet and runs without them. Every session follows the same high-impact format.
+            </div>
+        </div>
+
+        <!-- SESSION FORMAT -->
+        <div class="session-format">
+            <div class="sf">
+                <div class="sf-time">20 MIN</div>
+                <div class="sf-name">Teach</div>
+                <div class="sf-desc">8:00–8:20 PM — Instructor teaches the concept, shows real examples, explains the
+                    "why" before the "how"</div>
+            </div>
+            <div class="sf">
+                <div class="sf-time">25 MIN</div>
+                <div class="sf-name">Live Build</div>
+                <div class="sf-desc">8:20–8:45 PM — Everyone builds together in real time. Screen shared. Questions
+                    answered. No one left behind.</div>
+            </div>
+            <div class="sf">
+                <div class="sf-time">15 MIN</div>
+                <div class="sf-name">Share + Feedback</div>
+                <div class="sf-desc">8:45–9:00 PM — Students share what they built. Instructor gives specific feedback.
+                    Peers celebrate wins.</div>
+            </div>
+        </div>
+
+        <!-- ── WEEK 1 ── -->
+        <div class="week-header">
+            <div class="wh-left">
+                <div class="wh-week">WEEK 01</div>
+                <div class="wh-title">THINK LIKE A FOUNDER</div>
+                <div class="wh-days">Days 1 – 7 · Research · Validation · Brand · Pitch</div>
+            </div>
+            <div class="wh-right">
+                <div class="wh-outcome"><strong>Week 1 Outcome:</strong> A fully validated business idea with real
+                    market research, a brand identity, a logo, and a live 90-second pitch delivered to peers and
+                    teachers.</div>
+            </div>
+        </div>
+
+        <div class="days-grid">
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">01</div>
+                    <div class="dc-badge">Mindset</div>
+                </div>
+                <div class="dc-title">The Founder Mindset — Consumer vs Builder</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">The difference between using AI and building with AI. The three levels of AI
+                        literacy — user, builder, entrepreneur. Why 2026 is the most important year in history to start
+                        something.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Use Claude to generate 10 personalised startup ideas based on each student's
+                        interests, problems they face, and skills they already have.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Every student has 10 personal startup ideas generated. WhatsApp group
+                        created. First post — "My 3 favourite ideas."</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">02</div>
+                    <div class="dc-badge">Research</div>
+                </div>
+                <div class="dc-title">Market Research Using AI — Find What People Pay For</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">How to use Google Trends, Reddit, and Claude to find real demand. The
+                        difference between an idea you like and an idea the market wants. Analysing competitors live.
+                    </div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Research their top 2 ideas using AI. Find real competitors. Identify gaps. Ask
+                        Claude to play devil's advocate and challenge the idea.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Research report for 2 ideas. Competitor map. First hypothesis on which
+                        idea to build.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">03</div>
+                    <div class="dc-badge">Validation</div>
+                </div>
+                <div class="dc-title">Validate Like an Investor — Proof Before You Build</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">How investors think about ideas. The 3-question validation filter — does the
+                        problem exist, would people pay, is the timing right. What a validated idea looks like vs a
+                        guess.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Run their top idea through the validation filter. Use Claude to simulate 10
+                        potential customer responses. Students publicly commit to one idea in the group.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">One validated, committed idea per student. Public declaration in
+                        WhatsApp group.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">04</div>
+                    <div class="dc-badge">Brand</div>
+                </div>
+                <div class="dc-title">Build a Brand — Name, Logo, Identity in One Evening</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">What makes a brand memorable. Psychology of naming. How the world's best brands
+                        think about identity. Why a strong brand makes everything easier.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Claude generates 20 name options. Students select, check domain availability,
+                        create logo using Ideogram AI, build brand colour palette and font pair on Canva.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Brand name, logo, colour palette, font choice. Brand reveal shared in
+                        WhatsApp group.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">05</div>
+                    <div class="dc-badge">Design</div>
+                </div>
+                <div class="dc-title">Design Your Product — Describe It, Watch AI Build It</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Introduction to v0.dev and how AI turns text descriptions into real UI. The
+                        difference between a great product and a confusing one. What users need vs what founders think
+                        users need.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Students describe their product in plain English. v0.dev generates the full UI
+                        design. Students iterate until it looks like a real product. First screenshot shared.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Complete UI design of their product. Screenshot posted publicly. First
+                        time they can see what their startup looks like.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">06</div>
+                    <div class="dc-badge">Setup</div>
+                </div>
+                <div class="dc-title">Full Toolkit Setup — Every Tool They Will Need</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Overview of the complete LearnMax toolstack — what each tool does, why we chose
+                        it, how they work together. The importance of setting everything up before building.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Together: Bolt.new, Cursor, Vercel, Supabase, HeyGen, Zapier, Make.com,
+                        Mailchimp accounts created and connected. Every student ready to build from tomorrow.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Complete toolstack set up. 30-day public commitment written in WhatsApp
+                        group by each student.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 7 MILESTONE -->
+        <div class="milestone-full">
+            <div class="mf-left">
+                <div class="mf-label">Week 1 Milestone · Day 7</div>
+                <div class="mf-title">LIVE PITCH DAY</div>
+                <div class="mf-body">Every student delivers a 90-second live pitch — startup name, problem, target
+                    audience, solution, differentiator. Teachers and peers attend. Best pitches are shared on LearnMax
+                    social media. The energy shifts — students now have identity as founders, not just students.</div>
+            </div>
+            <div class="mf-right">
+                <div class="mf-num">90</div>
+                <div class="mf-sub">Seconds per pitch</div>
+            </div>
+        </div>
+
+        <!-- ── WEEK 2 ── -->
+        <div class="week-header" style="margin-top:4px;">
+            <div class="wh-left">
+                <div class="wh-week">WEEK 02</div>
+                <div class="wh-title">BUILD IT — SHIP IT</div>
+                <div class="wh-days">Days 8 – 16 · Vibe Coding · AI Building · Deploy Live</div>
+            </div>
+            <div class="wh-right">
+                <div class="wh-outcome"><strong>Week 2 Outcome:</strong> A live, functioning product on the internet. A
+                    real URL that anyone in the world can visit. Built entirely using AI — no code written manually by
+                    the student.</div>
+            </div>
+        </div>
+
+        <div class="days-grid">
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">08</div>
+                    <div class="dc-badge">Vibe Coding</div>
+                </div>
+                <div class="dc-title">Vibe Coding — Build a Full App in One Paragraph</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">What vibe coding is and why it is the most powerful skill of 2026. Instructor
+                        builds a complete app in Bolt.new from one paragraph in 3 minutes live. Students watch, then
+                        immediately replicate.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Every student writes one paragraph describing their product. Bolt.new generates
+                        the full working application. The most memorable session of the programme.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">First working version of their app. Screen recording shared — the
+                        moment they realise what is possible.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">09</div>
+                    <div class="dc-badge">Features</div>
+                </div>
+                <div class="dc-title">Feature Sprint — Add 3 Key Features in One Session</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">How to identify the right features vs nice-to-haves. The minimum viable product
+                        mindset. How to describe features to AI so it builds exactly what you want.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Students add three core features to their product using natural language
+                        prompts. Before/after comparison shown in group.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Product now has all core features. Version 2 screenshot shared in group
+                        for peer feedback.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">10</div>
+                    <div class="dc-badge">Design Polish</div>
+                </div>
+                <div class="dc-title">The Glow-Up — Make Your Product Look World Class</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Design psychology — why beautiful products convert better. Colour theory.
+                        Typography. The difference between a product that looks like a school project and one that looks
+                        professional.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Use Midjourney for hero images, refine colours and typography, polish overall
+                        layout. First time product feels like a real brand.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Polished, professional-looking product. Students send it to one friend
+                        for the first time.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">11</div>
+                    <div class="dc-badge">Commerce</div>
+                </div>
+                <div class="dc-title">E-Commerce in One Night — Sell Something Tonight</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">How online selling works. Payment psychology. Why starting with a simple
+                        product is always better than a complex one. Introduction to Shopify + Stripe.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Students who have physical/digital products build Shopify store with AI-written
+                        product descriptions and Stripe payments integrated. Instructor makes ₹1 test purchase on
+                        student store during session.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Working e-commerce capability. Some students make first real sale this
+                        evening.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">12</div>
+                    <div class="dc-badge">Apps & Games</div>
+                </div>
+                <div class="dc-title">Build a Real App or Game — Without Any Code</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Replit and advanced Bolt.new techniques. How to build interactive applications.
+                        Game mechanics and app logic using pure AI prompting.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Students build either an app or a browser game using their startup concept.
+                        Peer play session — students use each other's products live on Zoom.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Interactive application or game. Most shared session — students play
+                        each other's creations in real time.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">13</div>
+                    <div class="dc-badge">Backend</div>
+                </div>
+                <div class="dc-title">Real Users, Real Accounts — Add a Database and Login</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Why user accounts matter. What a database is and why it powers every real app.
+                        Introduction to Supabase and Clerk auth — no technical knowledge needed.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Students add user login, account creation, and a database to their product.
+                        Students create accounts on each other's products — first time they have real "users."</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Product has authentication and database. Students experience having
+                        their first real users.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">14</div>
+                    <div class="dc-badge">Debugging</div>
+                </div>
+                <div class="dc-title">Fix Anything — The 3-Step AI Debugging Method</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Why things break and why that is normal. The 3-step method: describe the
+                        problem → show AI the error → apply the fix. Building resilience as a founder.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Real bugs from students' own products are fixed live together. Students submit
+                        their biggest current problem — instructor resolves each one in front of the group.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">All major product issues resolved. Students now know how to debug
+                        anything themselves.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">15</div>
+                    <div class="dc-badge">Deploy</div>
+                </div>
+                <div class="dc-title">Launch to the World — Your Product Goes Live Tonight</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">What deployment means. How Vercel and Netlify work. Why getting something live
+                        matters more than making it perfect. The psychology of shipping.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Countdown together — 3, 2, 1, deploy. Every student clicks deploy
+                        simultaneously. Real URL generated. Students immediately text their live URL to one person they
+                        know.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Every student has a live URL. The most emotional moment of the
+                        programme so far. "My product is on the internet" feeling.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 16 MILESTONE -->
+        <div class="milestone-full">
+            <div class="mf-left">
+                <div class="mf-label">Week 2 Milestone · Day 16</div>
+                <div class="mf-title">PRODUCT DEMO</div>
+                <div class="mf-body">Every student screen-shares their live product and presents a 2-minute founder
+                    demo. Parents invited. Session recorded. Top 3 products featured on LearnMax Instagram and LinkedIn.
+                    This recording becomes the student's first portfolio piece. The room energy shifts permanently —
+                    they are not students building a project. They are founders who have shipped.</div>
+            </div>
+            <div class="mf-right">
+                <div class="mf-num">2</div>
+                <div class="mf-sub">Minute founder demo</div>
+            </div>
+        </div>
+
+        <!-- ── WEEK 3 ── -->
+        <div class="week-header" style="margin-top:4px;">
+            <div class="wh-left">
+                <div class="wh-week">WEEK 03</div>
+                <div class="wh-title">MARKET IT</div>
+                <div class="wh-days">Days 17 – 23 · Content · Video · Reach · Real Visitors</div>
+            </div>
+            <div class="wh-right">
+                <div class="wh-outcome"><strong>Week 3 Outcome:</strong> A professional marketing video live on social
+                    media. A 30-day automated content system. First real strangers visiting their product from the
+                    internet.</div>
+            </div>
+        </div>
+
+        <div class="days-grid">
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">17</div>
+                    <div class="dc-badge">Psychology</div>
+                </div>
+                <div class="dc-title">Scroll-Stop Psychology — What Makes People Actually Watch</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Why 95% of content gets scrolled past. The hook formula that stops thumbs.
+                        Analysing 5 viral videos live — what they have in common, why they worked.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Students build their own personal hook formula using Claude. 3 different hooks
+                        written for their specific product.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">3 powerful hooks per student. Understanding of what makes content work
+                        before creating any.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">18</div>
+                    <div class="dc-badge">Script</div>
+                </div>
+                <div class="dc-title">Write Your Script — The 5-Part Formula That Converts</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">The 5-part script formula: Hook → Problem → Solution → Proof → CTA. Why this
+                        structure works. How to adapt it for any product in any niche.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Claude writes 3 script versions for each student's product. Students combine
+                        the best elements into their final script — personalised, specific, compelling.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Final approved script ready for video production next session.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">19</div>
+                    <div class="dc-badge">Video</div>
+                </div>
+                <div class="dc-title">Create a Pro Marketing Video — No Camera Needed</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">How HeyGen and InVideo AI work. The tools that eliminate every barrier to
+                        professional video — no camera, no editing skills, no studio. What makes an AI video look
+                        credible.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Students input their script into HeyGen/InVideo AI. AI generates a professional
+                        presenter video with subtitles, B-roll, and music. Students watch each other's finished videos
+                        live.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Professional marketing video complete. The most-screenshotted session
+                        of the programme.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">20</div>
+                    <div class="dc-badge">Go Live</div>
+                </div>
+                <div class="dc-title">Post Live Together — Watch the Numbers in Real Time</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Platform strategy — where to post, when to post, what captions work. How
+                        algorithms amplify content in the first hour. Why posting together creates momentum.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">AI writes captions and hashtags. Everyone posts simultaneously. Class watches
+                        each other's view counts climb in real time during the session.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Marketing video live on social media. First real views from strangers.
+                        The moment the product meets the world.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">21</div>
+                    <div class="dc-badge">Content System</div>
+                </div>
+                <div class="dc-title">30-Day Content Calendar — Marketing That Runs Itself</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Why consistent content wins. How to build a content system once and let it run.
+                        Buffer and Hootsuite overview — scheduling content in advance so it posts automatically.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Claude generates 30 post ideas + 10 caption templates for each student's
+                        product. Buffer set up and first 7 posts scheduled. Marketing now runs without them.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">30-day content calendar live. Posts scheduled and auto-publishing.
+                        Marketing now requires zero daily effort.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">22</div>
+                    <div class="dc-badge">Copywriting</div>
+                </div>
+                <div class="dc-title">Full Copy Sprint — Every Word Your Business Needs</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Copywriting as the highest-leverage skill in business. How words sell things
+                        when design cannot. The psychology of persuasion in written form.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">In 25 minutes: 3 ad headlines, product description, welcome email, cold DM
+                        template, one-line pitch, homepage headline — all written by Claude, refined by the student.
+                    </div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Complete copy library for their startup. Every piece of written content
+                        they need to run a real business.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 23 MILESTONE -->
+        <div class="milestone-full">
+            <div class="mf-left">
+                <div class="mf-label">Week 3 Milestone · Day 23</div>
+                <div class="mf-title">MARKETING SHOWCASE</div>
+                <div class="mf-body">Every student presents their marketing video and shows their live view count. Most
+                    views wins a featured post on LearnMax + a free tool subscription. The class votes on best hook,
+                    best video, best caption. Students who have received their first real visit from a stranger share
+                    that moment with the group.</div>
+            </div>
+            <div class="mf-right">
+                <div class="mf-num">30</div>
+                <div class="mf-sub">Day content system live</div>
+            </div>
+        </div>
+
+        <!-- ── WEEK 4 ── -->
+        <div class="week-header" style="margin-top:4px;">
+            <div class="wh-left">
+                <div class="wh-week">WEEK 04</div>
+                <div class="wh-title">AUTOMATE IT</div>
+                <div class="wh-days">Days 24 – 30 · AI Agents · Systems · Demo Day</div>
+            </div>
+            <div class="wh-right">
+                <div class="wh-outcome"><strong>Week 4 Outcome:</strong> A completely automated business that runs 24
+                    hours without any manual effort. A Demo Day presentation delivered to a live audience of parents,
+                    teachers, and guests.</div>
+            </div>
+        </div>
+
+        <div class="days-grid">
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">24</div>
+                    <div class="dc-badge">Automation Map</div>
+                </div>
+                <div class="dc-title">Map Your Business — What AI Should Own vs What You Should</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">The automation mindset. Every successful entrepreneur builds systems that work
+                        without them. Mapping every business task and deciding — AI, system, or human.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Students map their complete business with Claude. Every task categorised.
+                        Automation priority list created. Zapier and Make.com accounts set up.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Complete automation roadmap. Every task in the business mapped to a
+                        system or AI agent.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">25</div>
+                    <div class="dc-badge">Support Agent</div>
+                </div>
+                <div class="dc-title">Build a Customer Support AI — Live Before 9 PM</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">What an AI agent is. How Claude API connects to a website via Zapier. The
+                        difference between a chatbot and a genuine AI support system.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Students build a customer support agent using Zapier + Claude API. Agent
+                        responds to customer questions about their specific product. Students send tricky questions to
+                        each other's bots.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Working AI customer support agent. Business now answers customer
+                        questions 24/7 without the student.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">26</div>
+                    <div class="dc-badge">Social Auto</div>
+                </div>
+                <div class="dc-title">Full Social Media Automation — Post Every Day, Do Nothing</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">How Make.com connects multiple apps into one automated pipeline. The concept of
+                        trigger → action → result. Why automation multiplies a founder's time by 10x.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Make.com pipeline: Claude generates daily post → Buffer schedules → auto-posts
+                        across platforms. Everyone activates simultaneously. Social media now runs without them.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Fully automated social media pipeline. Content creation, scheduling,
+                        and posting — all handled by AI.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">27</div>
+                    <div class="dc-badge">Lead System</div>
+                </div>
+                <div class="dc-title">Lead Capture + Automated Email — Turn Visitors into Customers</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">The customer journey — from visiting a website to becoming a paying customer.
+                        What a lead is. Why email is still the highest-converting channel.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Zapier: user signs up → Claude writes personalised welcome email → Mailchimp
+                        sends → 3-day follow-up sequence activates automatically. Full lead nurturing system live before
+                        9 PM.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Complete lead capture and email automation. Every new visitor gets a
+                        personalised follow-up sequence — automatically.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">28</div>
+                    <div class="dc-badge">Full System</div>
+                </div>
+                <div class="dc-title">Connect Everything — The Complete Business Map</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">Systems thinking. How all the pieces connect into one seamless operation. The
+                        visual workflow — seeing the whole business as a machine.</div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Make.com visual workflow connecting all automations. Students screenshot their
+                        complete business system map — a web of connected automations running their startup.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Complete automated business system. Screenshot shared. Business now
+                        operates 24/7 without the student touching anything.</div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="dc-top">
+                    <div class="dc-day">29</div>
+                    <div class="dc-badge">Demo Prep</div>
+                </div>
+                <div class="dc-title">Demo Day Preparation — Your Story, Your Stage</div>
+                <div class="dc-teach">
+                    <div class="dc-label">Teach</div>
+                    <div class="dc-body">How to tell a founder story. Structure of a great Demo Day presentation —
+                        problem, journey, product, marketing, automation, vision. What parents and guests want to see.
+                    </div>
+                </div>
+                <div class="dc-build">
+                    <div class="dc-label">Build Live</div>
+                    <div class="dc-body">Claude writes their full pitch script. 5-slide Canva deck created. Breakout
+                        room rehearsals — 2 dress rehearsals before the real event tomorrow.</div>
+                </div>
+                <div class="dc-outcome">
+                    <div class="dc-outcome-icon"><svg viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <div class="dc-outcome-text">Complete pitch script and slide deck. Students confident and rehearsed.
+                        Ready for Demo Day.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 30 MILESTONE -->
+        <div class="milestone-full">
+            <div class="mf-left">
+                <div class="mf-label">Week 4 Culmination · Day 30</div>
+                <div class="mf-title">DEMO DAY</div>
+                <div class="mf-body">90-minute public event. Every student presents: live product + marketing video +
+                    automation system + founder story. Parents, school leadership, and invited guests attend. Four
+                    awards — Best Product, Best Video, Most Innovative, Most Impressive Automation. Digital certificates
+                    issued to all. Full session recorded. This recording becomes the primary asset LearnMax uses to
+                    onboard every subsequent school — and the most powerful portfolio piece each student will ever have.
+                </div>
+            </div>
+            <div class="mf-right">
+                <div class="mf-num">90</div>
+                <div class="mf-sub">Minute public event</div>
+            </div>
+        </div>
+
+        <!-- LEVEL 1 LEARNING OUTCOMES -->
+        <div class="section-gap"></div>
+        <div class="label" style="margin-bottom:24px;">Level 1 — Student Learning Outcomes</div>
+        <div class="outcomes">
+            <div class="oc">
+                <div class="oc-icon"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                    </svg></div>
+                <div class="oc-title">Live Product</div>
+                <div class="oc-body">Real URL. On the internet. Accessible to the entire world right now.</div>
+            </div>
+            <div class="oc">
+                <div class="oc-icon"><svg viewBox="0 0 24 24">
+                        <polygon points="23 7 16 12 23 17 23 7" />
+                        <rect x="1" y="5" width="15" height="14" rx="2" />
+                    </svg></div>
+                <div class="oc-title">Pro Marketing Video</div>
+                <div class="oc-body">No camera. No studio. No agency. Professional output.</div>
+            </div>
+            <div class="oc">
+                <div class="oc-icon"><svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14" />
+                    </svg></div>
+                <div class="oc-title">Auto Business</div>
+                <div class="oc-body">Runs 24 hours without any manual daily effort.</div>
+            </div>
+            <div class="oc">
+                <div class="oc-icon"><svg viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                    </svg></div>
+                <div class="oc-title">Portfolio + Certificate</div>
+                <div class="oc-body">Demo Day recording. LearnMax certificate. Strongest portfolio asset possible.</div>
+            </div>
+        </div>
+
+        <!-- ════════════ ADVANCED ════════════ -->
+        <div class="page-break"></div>
+        <div class="sec-title-wrap">
+            <div class="sec-number">02</div>
+            <div class="sec-title">FOUNDER TRACK<br><span class="g">ADVANCED PROGRAMME</span></div>
+            <div class="sec-desc">After Demo Day, top performers are selected for the advanced Founder Track. This is
+                not for everyone. This is for the students who proved they can execute, think, and ship. They spend 90
+                days scaling their startup to real users, real revenue, and investor readiness.</div>
+        </div>
+
+        <div class="adv-intro">
+            <div class="adv-intro-title">How Selection Works</div>
+            <div class="adv-intro-body">After Demo Day, LearnMax evaluates every student on four criteria — product
+                quality, presentation confidence, business logic clarity, and vision for growth. The top 30–40% are
+                personally invited to apply for Founder Track. Applicants submit a one-page founder statement outlining
+                their growth plan. Final selection is based on founder potential and commitment — not just product
+                sophistication. Selected students receive a formal invitation letter, which becomes the first thing they
+                show their parents.</div>
+        </div>
+
+        <div class="adv-modules">
+            <div class="am">
+                <div class="am-month">Month 1 · Days 31–60</div>
+                <div class="am-title">Scale — Get Your First 100 Real Users</div>
+                <div class="am-body">The product exists. Now it needs real people using it. Students learn customer
+                    psychology, acquisition strategy, and how to measure what matters. Every session focuses on one
+                    thing — growing the number of real people engaging with their product.</div>
+                <div class="am-sessions">
+                    <div class="am-session"><strong>Week 1:</strong> Customer research — who are they, where do they
+                        live online, why would they use this</div>
+                    <div class="am-session"><strong>Week 2:</strong> Acquisition — organic growth, paid ads, referral
+                        systems, community building</div>
+                    <div class="am-session"><strong>Week 3:</strong> Analytics — install tracking, understand what users
+                        do, what makes them leave</div>
+                    <div class="am-session"><strong>Week 4:</strong> Iteration — change one thing based on data, measure
+                        impact, repeat. First 100 users milestone.</div>
+                </div>
+            </div>
+
+            <div class="am">
+                <div class="am-month">Month 2 · Days 61–90</div>
+                <div class="am-title">Revenue — Make Your First Rupee</div>
+                <div class="am-body">Users exist. Now monetize. Students learn pricing psychology, how to build a sales
+                    funnel that converts, and how to handle a real financial transaction with a real customer who is not
+                    a friend or family member.</div>
+                <div class="am-sessions">
+                    <div class="am-session"><strong>Week 1:</strong> Pricing strategy — value-based pricing, anchoring,
+                        why free is a trap</div>
+                    <div class="am-session"><strong>Week 2:</strong> Sales funnel design — landing page, offer,
+                        checkout, thank you sequence</div>
+                    <div class="am-session"><strong>Week 3:</strong> First revenue push — direct outreach, launch
+                        campaign, conversion tracking</div>
+                    <div class="am-session"><strong>Week 4:</strong> Unit economics — cost of acquisition, lifetime
+                        value, sustainable model. First revenue milestone.</div>
+                </div>
+            </div>
+
+            <div class="am">
+                <div class="am-month">Month 3 · Days 91–120</div>
+                <div class="am-title">Pitch Ready — From Startup to Investment Case</div>
+                <div class="am-body">Revenue exists. Now tell the story in a way that makes investors write cheques.
+                    Students learn how investors think, what they look for, how to build a pitch deck, and how to
+                    perform under pressure in a real investor meeting.</div>
+                <div class="am-sessions">
+                    <div class="am-session"><strong>Week 1:</strong> Investor psychology — what they look for, how they
+                        decide, what kills deals</div>
+                    <div class="am-session"><strong>Week 2:</strong> Pitch deck construction — 10 slides, each with one
+                        job to do</div>
+                    <div class="am-session"><strong>Week 3:</strong> Pitch delivery — voice, pacing, confidence,
+                        handling hard questions</div>
+                    <div class="am-session"><strong>Week 4:</strong> Mock investor sessions — real pressure, real
+                        feedback. LaunchPad application submitted.</div>
+                </div>
+            </div>
+
+            <div class="am">
+                <div class="am-month">Ongoing · Full Duration</div>
+                <div class="am-title">Community — The LearnMax Founder Network</div>
+                <div class="am-body">Founder Track students are not alone. They have access to weekly cohort calls, peer
+                    accountability pods, direct mentorship, and introductions to the LearnMax investor and industry
+                    partner network.</div>
+                <div class="am-sessions">
+                    <div class="am-session"><strong>Weekly:</strong> Founder cohort call — wins, blocks, accountability
+                    </div>
+                    <div class="am-session"><strong>Bi-weekly:</strong> Peer review session — students critique each
+                        other's progress</div>
+                    <div class="am-session"><strong>Monthly:</strong> Mentor session — industry leaders, founders,
+                        investors</div>
+                    <div class="am-session"><strong>Ongoing:</strong> Private Slack group, resource library, investor
+                        introductions</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Learning Outcomes -->
+        <div class="label" style="margin-bottom:24px;">Founder Track — What Students Walk Away With</div>
+        <div class="selection">
+            <div class="sel-card">
+                <div class="sel-title">Tangible Outcomes</div>
+                <div class="sel-items">
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>100+ real users on their live product
+                    </div>
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>First revenue generated from a paying customer
+                    </div>
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>Complete 10-slide investor pitch deck
+                    </div>
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>3-minute pitch delivered under real pressure
+                    </div>
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>Business with measurable unit economics
+                    </div>
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>LearnMax Founder Certificate
+                    </div>
+                </div>
+            </div>
+            <div class="sel-card">
+                <div class="sel-title">Founder Mindset Shifts</div>
+                <div class="sel-items">
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>Thinks in data — decisions based on evidence
+                    </div>
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>Customer obsessed — builds what users want
+                    </div>
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>Revenue driven — understands business sustainability
+                    </div>
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>Resilient — treats failure as information
+                    </div>
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>Narrative — can tell their story compellingly
+                    </div>
+                    <div class="sel-item">
+                        <div class="sel-dot"></div>Network — connected to real founders and investors
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════ LAUNCHPAD ════════════ -->
+        <div class="page-break"></div>
+        <div class="sec-title-wrap">
+            <div class="sec-number">03</div>
+            <div class="sec-title">LAUNCHPAD<br><span class="g">INTER-SCHOOL COMPETITION</span></div>
+            <div class="sec-desc">The culmination of the entire ecosystem. Founder Track graduates compete in a public
+                inter-school event. Real angel investors attend. Real funding is on the table. The best student founders
+                in the city — from all LearnMax partner schools — pitch on one stage.</div>
+        </div>
+
+        <!-- Competition Flow -->
+        <div class="label" style="margin-bottom:20px;">The Competition Flow</div>
+        <div class="comp-flow">
+            <div class="cf-node">
+                <div class="cf-n-num">Step 01</div>
+                <div class="cf-n-title">Application</div>
+                <div class="cf-n-body">Founder Track graduates submit their pitch deck and a 3-minute video pitch</div>
+            </div>
+            <div class="cf-arrow">→</div>
+            <div class="cf-node">
+                <div class="cf-n-num">Step 02</div>
+                <div class="cf-n-title">Selection</div>
+                <div class="cf-n-body">LearnMax panel selects 15–20 finalists from all partner schools city-wide</div>
+            </div>
+            <div class="cf-arrow">→</div>
+            <div class="cf-node">
+                <div class="cf-n-num">Step 03</div>
+                <div class="cf-n-title">LaunchPad Day</div>
+                <div class="cf-n-body">Full-day public event. Live pitches. 5 min pitch + 5 min Q&A from investor panel
+                </div>
+            </div>
+            <div class="cf-arrow">→</div>
+            <div class="cf-node">
+                <div class="cf-n-num">Step 04</div>
+                <div class="cf-n-title">Funded</div>
+                <div class="cf-n-body">Top 3 receive angel investment. All finalists receive mentorship and
+                    introductions</div>
+            </div>
+        </div>
+
+        <!-- Competition Details -->
+        <div class="comp-detail">
+            <div class="cd">
+                <div class="cd-label">Event Format</div>
+                <div class="cd-title">The LaunchPad Day</div>
+                <div class="cd-items">
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Full-day event at premium venue or school auditorium
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Morning — founder networking and rehearsal
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Afternoon — live pitches in front of investor panel
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Evening — awards, celebration, investor meetings
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Parents, school leadership, media, startup community invited
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Professionally photographed and recorded
+                    </div>
+                </div>
+            </div>
+            <div class="cd">
+                <div class="cd-label">Who Attends</div>
+                <div class="cd-title">The Audience</div>
+                <div class="cd-items">
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Angel investors — real people who write real cheques
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Industry leaders and senior entrepreneurs
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Parents of all finalist students
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>School principals and senior leadership
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Local media and startup press
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>LearnMax alumni and community
+                    </div>
+                </div>
+            </div>
+            <div class="cd">
+                <div class="cd-label">What Happens After</div>
+                <div class="cd-title">Post-Event</div>
+                <div class="cd-items">
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Winners receive funding and enter startup ecosystem
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>All finalists receive investor introductions
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Partner schools featured in all post-event coverage
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Students' profiles shared with investor network
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Event recording becomes permanent legacy asset
+                    </div>
+                    <div class="cd-item">
+                        <div class="cd-dot"></div>Next year's applications grow 3x in every school
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Investor Section -->
+        <div class="investor-intro">
+            <div class="ii-badge">Real Investors · Real Funding · Real Futures</div>
+            <div class="ii-headline">PITCH TO ANGEL<br><span class="g">INVESTORS.</span><br>GET FUNDED.</div>
+            <div class="ii-cols">
+                <div>
+                    <div class="ii-body">
+                        Students who reach LaunchPad have earned it through 120 days of real work — a live product, real
+                        users, real revenue, and a pitch-ready startup. When they stand up in front of investors, they
+                        are not students presenting a concept. They are <strong>founders presenting
+                            evidence.</strong><br><br>
+                        The investors who attend LaunchPad are not ceremonial. They are there because LearnMax has
+                        curated a pipeline of <strong>genuinely investable student startups</strong> — and early-stage
+                        investors understand the compounding advantage of backing a founder at 17 who has already built
+                        and shipped.<br><br>
+                        With <strong>Manav Rachna International School</strong> and <strong>LearnMax</strong> behind
+                        every student who reaches this stage — these founders enter the startup world with institutional
+                        credibility, a verified track record, and a network that most adult founders spend years trying
+                        to build.
+                    </div>
+                </div>
+                <div>
+                    <div class="ii-event">
+                        <div class="ii-ev-item">
+                            <div class="ii-ev-icon"><svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" y1="8" x2="12" y2="12" />
+                                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                                </svg></div>
+                            <div class="ii-ev-text"><strong>This is not a prize.</strong> It is a door. And we open it
+                                only for students who have earned the right to walk through it.</div>
+                        </div>
+                        <div class="ii-ev-item">
+                            <div class="ii-ev-icon"><svg viewBox="0 0 24 24">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg></div>
+                            <div class="ii-ev-text"><strong>Manav Rachna's students</strong> compete with the best young
+                                founders from every partner school in the city. Your school's reputation travels with
+                                them.</div>
+                        </div>
+                        <div class="ii-ev-item">
+                            <div class="ii-ev-icon"><svg viewBox="0 0 24 24">
+                                    <line x1="12" y1="1" x2="12" y2="23" />
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg></div>
+                            <div class="ii-ev-text"><strong>Funded students</strong> become the most powerful case study
+                                for every future enrolment — in your school and every school that hears about them.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prizes -->
+        <div class="prizes">
+            <div class="prize first">
+                <div class="prize-rank">1st</div>
+                <div class="prize-title">Grand Winner</div>
+                <div class="prize-amount">₹5–10L</div>
+                <div class="prize-body">Angel investment + 6-month mentorship from senior industry leader + LearnMax
+                    incubation support</div>
+            </div>
+            <div class="prize">
+                <div class="prize-rank">2nd</div>
+                <div class="prize-title">Runner Up</div>
+                <div class="prize-amount">₹2–5L</div>
+                <div class="prize-body">Angel investment + 3-month mentorship + investor introductions for further
+                    funding</div>
+            </div>
+            <div class="prize">
+                <div class="prize-rank">3rd</div>
+                <div class="prize-title">Third Place</div>
+                <div class="prize-amount">₹1–2L</div>
+                <div class="prize-body">Seed funding + mentorship + permanent access to LearnMax founder network</div>
+            </div>
+        </div>
+
+        <!-- ════════════ STUDENT OUTCOMES ════════════ -->
+        <div class="page-break"></div>
+        <div class="sec-title-wrap">
+            <div class="sec-number" style="font-size:80px;">ALL</div>
+            <div class="sec-title">STUDENT LEARNING<br><span class="g">OUTCOMES</span></div>
+            <div class="sec-desc">Every level of the LearnMax ecosystem produces specific, measurable, verifiable
+                outcomes. Not certificates. Not participation badges. Real proof — products that work, revenue that was
+                earned, pitches that were delivered.</div>
+        </div>
+
+        <div class="outcomes-full">
+            <div class="slo">
+                <div class="slo-level slo-l1">Level 1 — Every Student</div>
+                <div class="slo-title">30 Days · What They Build</div>
+                <div class="slo-items">
+                    <div class="slo-item"><span class="slo-check slo-l1-check">✦</span>Live website or app on the
+                        internet — real URL, publicly accessible</div>
+                    <div class="slo-item"><span class="slo-check slo-l1-check">✦</span>Professional marketing video —
+                        AI-generated, zero production cost</div>
+                    <div class="slo-item"><span class="slo-check slo-l1-check">✦</span>Automated business system running
+                        24/7 without manual effort</div>
+                    <div class="slo-item"><span class="slo-check slo-l1-check">✦</span>Validated startup idea with real
+                        market research and evidence</div>
+                    <div class="slo-item"><span class="slo-check slo-l1-check">✦</span>30-day automated social media
+                        content calendar</div>
+                    <div class="slo-item"><span class="slo-check slo-l1-check">✦</span>Complete copy library — emails,
+                        ads, captions, product descriptions</div>
+                    <div class="slo-item"><span class="slo-check slo-l1-check">✦</span>Demo Day presentation recorded —
+                        portfolio-grade content</div>
+                    <div class="slo-item"><span class="slo-check slo-l1-check">✦</span>LearnMax Completion Certificate
+                    </div>
+                </div>
+            </div>
+
+            <div class="slo">
+                <div class="slo-level slo-l2">Level 2 — Selected Founders</div>
+                <div class="slo-title">90 Days · What They Achieve</div>
+                <div class="slo-items">
+                    <div class="slo-item"><span class="slo-check slo-l2-check">✦</span>100+ real verified users on their
+                        live product</div>
+                    <div class="slo-item"><span class="slo-check slo-l2-check">✦</span>First revenue generated from a
+                        paying customer who is not a friend</div>
+                    <div class="slo-item"><span class="slo-check slo-l2-check">✦</span>Sustainable business model with
+                        measurable unit economics</div>
+                    <div class="slo-item"><span class="slo-check slo-l2-check">✦</span>Investor-ready 10-slide pitch
+                        deck</div>
+                    <div class="slo-item"><span class="slo-check slo-l2-check">✦</span>3-minute pitch delivered under
+                        real pressure with investor Q&A</div>
+                    <div class="slo-item"><span class="slo-check slo-l2-check">✦</span>Customer interview data and user
+                        feedback analysis</div>
+                    <div class="slo-item"><span class="slo-check slo-l2-check">✦</span>Access to LearnMax founder and
+                        investor network</div>
+                    <div class="slo-item"><span class="slo-check slo-l2-check">✦</span>LearnMax Founder Certificate
+                    </div>
+                </div>
+            </div>
+
+            <div class="slo">
+                <div class="slo-level slo-l3">Level 3 — LaunchPad Finalists</div>
+                <div class="slo-title">Competition Day · What They Gain</div>
+                <div class="slo-items">
+                    <div class="slo-item"><span class="slo-check slo-l3-check">✦</span>Real pitch in front of real angel
+                        investors — not a simulation</div>
+                    <div class="slo-item"><span class="slo-check slo-l3-check">✦</span>Top 3 receive actual funding —
+                        ₹1L to ₹10L range</div>
+                    <div class="slo-item"><span class="slo-check slo-l3-check">✦</span>Personal investor introductions
+                        for all finalists</div>
+                    <div class="slo-item"><span class="slo-check slo-l3-check">✦</span>Media coverage in local and
+                        startup press</div>
+                    <div class="slo-item"><span class="slo-check slo-l3-check">✦</span>Entry into startup ecosystem with
+                        institutional credibility</div>
+                    <div class="slo-item"><span class="slo-check slo-l3-check">✦</span>6-month post-event mentorship
+                        from industry leaders</div>
+                    <div class="slo-item"><span class="slo-check slo-l3-check">✦</span>Permanent place in LearnMax Hall
+                        of Founders</div>
+                    <div class="slo-item"><span class="slo-check slo-l3-check">✦</span>School featured as the
+                        institution that launched them</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- What school gets -->
+        <div class="section-gap"></div>
+        <div class="label" style="margin-bottom:24px;">What Manav Rachna Receives</div>
+        <div class="school-bens">
+            <div class="sb">
+                <div class="sb-title">Prestige & Recognition</div>
+                <div class="sb-body">Manav Rachna is listed as a LearnMax AI Pioneer Institution on all platforms,
+                    communications, and post-event media. When a student from your school wins LaunchPad — your school's
+                    name is in every headline, every investor post, every social media celebration. That recognition
+                    compounds year after year.</div>
+            </div>
+            <div class="sb">
+                <div class="sb-title">Student Transformation</div>
+                <div class="sb-body">Every student who completes Level 1 walks out with a live startup, Demo Day
+                    recording, and portfolio asset that transforms their college applications, university interviews,
+                    and career prospects. The academic calendar is untouched — every session runs 8–9 PM exclusively.
+                </div>
+            </div>
+            <div class="sb">
+                <div class="sb-title">Faculty Development</div>
+                <div class="sb-body">A complimentary AI productivity session for your teaching staff. Real tools that
+                    reduce lesson planning time, generate assessment materials, and enhance classroom delivery.
+                    Practical. Immediately applicable. No theoretical workshops.</div>
+            </div>
+            <div class="sb">
+                <div class="sb-title">Zero Financial Commitment</div>
+                <div class="sb-body">The school pays nothing. Students enrol directly with LearnMax. The school's role
+                    is to host the free orientation session, announce the opportunity to students, and provide a venue
+                    for Demo Day. Everything else — delivery, support, materials, certificates — is LearnMax's
+                    responsibility.</div>
+            </div>
+        </div>
+
+        <!-- CLOSING -->
+        <div class="closing">
+            <div class="cl-ring" style="width:540px;height:540px;"></div>
+            <div class="cl-ring" style="width:360px;height:360px;border-color:rgba(201,168,76,0.1);"></div>
+            <div class="cl-ring" style="width:180px;height:180px;border-color:rgba(201,168,76,0.07);"></div>
+            <div class="cl-h">YOUR SCHOOL BECOMES<br>THE <span class="g">LAUNCHPAD</span></div>
+            <div class="cl-body">A year from now, some schools in this city will be known as the ones that moved first —
+                the institutions whose students were already building, earning, and pitching investors while others were
+                still preparing to begin. We would like Manav Rachna to be remembered as the first.</div>
+            <div class="cl-contact">
+                <div>
+                    <div class="cl-name">Tanish Arora</div>
+                    <div class="cl-detail">Founder, LearnMax</div>
+                </div>
+                <div class="cl-sep"></div>
+                <div class="cl-detail">+91 81462 81299</div>
+                <div class="cl-sep"></div>
+                <div class="cl-detail">learnmaxskills@gmail.com</div>
+            </div>
+        </div>
+
+        <div class="ftr">
+            <div class="ftr-logo">LearnMax</div>
+            <div class="ftr-right">© 2026 LearnMax · Building Founders, Not Just Students<br>learnmaxskills@gmail.com ·
+                +91 81462 81299</div>
+        </div>
+
+    </div>
+
+    <script>
+        const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } }); }, { threshold: .05 });
+        document.querySelectorAll('.day-card,.oc,.slo,.am,.cd,.prize,.sel-card,.eco-card,.sf,.sb').forEach(el => { el.style.cssText += 'transition:opacity .45s ease,transform .45s ease;opacity:0;transform:translateY(18px);'; io.observe(el); });
+    </script>
+</body>
+
+</html>
+
+
+
+
+the above is the html code i want you to create a new pge in our web pasting this exact html code and amnd push thta and
+add a bg button on home page to view it
